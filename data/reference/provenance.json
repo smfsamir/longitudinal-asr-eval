@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/KoelLabs/ML",
+  "head": "8ddcf1a735c128affd654e0a97a0b72aa13694fe",
+  "source_sha256": {
+    "notebooks/Eval/ASR_eval.ipynb": "f2d55a92cdb976b3ab52281c8ac2b62ad62d4a7f38cf0b75b4a468b273efb62e",
+    "scripts/core/text.py": "10bd36ad74504c0e83054339f1c1b1f770efa340ce4c2456c59769937873989b",
+    "scripts/eval/metrics.py": "8d0b4ad7dc8357effa946447e82762dbf9a488dfb815d0fe23de449bb2869d60",
+    ".data/scores_asr.csv": "b4e06e06843b935f042b28ddfc91d1a863dd8cf25c45dc632b92caab0b91f096",
+    "data/ArunaSpeech/L1Suitcase.wav": "bd3cb07d1b69f7767bf2cc6fe15aa3ba020ad95b44283995acd8af8bd79ef839",
+    "data/ArunaSpeech/L1Suitcase.txt": "ebdfe9fac9c1f9a5b3f4bd77ad07b4ecf8fb2fb983a6b378375ef3944b933495"
+  },
+  "aggregates": "accent_scores.csv",
+  "reference_values": "../paper_values.csv"
+}

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "longitudinal-asr-eval"
+version = "0.1.0"
+description = "Longitudinal evaluation of English ASR across accents"
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0"}
+dependencies = [
+  "numpy>=1.24,<3", "pandas>=2,<3", "scipy>=1.10,<2",
+  "matplotlib>=3.7,<4", "jiwer==3.1.0", "soundfile>=0.12,<1",
+  "praat-textgrids==1.4.0", "openpyxl>=3.1,<4",
+]
+
+[project.optional-dependencies]
+whisper = ["faster-whisper>=1.1,<2"]
+transformers = ["torch>=2.2", "transformers==4.57.6", "sentencepiece", "librosa>=0.10"]
+owsm = ["espnet", "espnet-model-zoo"]
+qwen3 = ["qwen-asr"]
+google = ["google-cloud-speech>=2.32", "google-cloud-storage>=2"]
+omnilingual = ["omnilingual-asr"]
+dev = ["pytest>=8,<9", "ruff>=0.9,<1"]
+
+[project.scripts]
+asr-eval = "longitudinal_asr.cli:main"
+
+[tool.setuptools]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+
+[tool.setuptools.packages.find]
+include = ["longitudinal_asr*"]
+
+[tool.setuptools.package-data]
+longitudinal_asr = ["*.json", "logos/*.png"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+ignore = ["E741"]

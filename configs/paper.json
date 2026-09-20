@@ -1,0 +1,260 @@
+{
+  "seed": 0,
+  "models": [
+    {
+      "id": "deepspeech",
+      "name": "Deepspeech",
+      "release_date": "2021-10",
+      "backend": "stt",
+      "checkpoint": "models/deepspeech/model.tflite",
+      "options": {
+        "scorer": "models/deepspeech/huge-vocabulary.scorer"
+      },
+      "provider": "mozilla"
+    },
+    {
+      "id": "wavlm",
+      "name": "WavLM Libri-100h",
+      "release_date": "2021-12",
+      "backend": "ctc",
+      "checkpoint": "patrickvonplaten/wavlm-libri-clean-100h-base",
+      "options": {},
+      "provider": "microsoft"
+    },
+    {
+      "id": "whisper-v1",
+      "name": "Whisper Large v1",
+      "release_date": "2022-09",
+      "backend": "whisper",
+      "checkpoint": "large-v1",
+      "options": {},
+      "provider": "openai"
+    },
+    {
+      "id": "whisper-v2",
+      "name": "Whisper Large v2",
+      "release_date": "2022-12",
+      "backend": "whisper",
+      "checkpoint": "large-v2",
+      "options": {},
+      "provider": "openai"
+    },
+    {
+      "id": "mms",
+      "name": "MMS 1B All",
+      "release_date": "2023-05",
+      "backend": "ctc",
+      "checkpoint": "facebook/mms-1b-all",
+      "options": {
+        "language": "eng"
+      },
+      "provider": "meta"
+    },
+    {
+      "id": "owsm-v1",
+      "name": "OWSM 1.0 272M",
+      "release_date": "2023-09",
+      "backend": "owsm",
+      "checkpoint": "espnet/owsm_v1",
+      "options": {},
+      "provider": "cmu"
+    },
+    {
+      "id": "owsm-v2",
+      "name": "OWSM 2.0 739M",
+      "release_date": "2023-10",
+      "backend": "owsm",
+      "checkpoint": "espnet/owsm_v2_ebranchformer",
+      "options": {},
+      "provider": "cmu"
+    },
+    {
+      "id": "whisper-v3",
+      "name": "Whisper Large v3",
+      "release_date": "2023-11",
+      "backend": "whisper",
+      "checkpoint": "large-v3",
+      "options": {},
+      "provider": "openai"
+    },
+    {
+      "id": "seamless",
+      "name": "SeamlessM4T",
+      "release_date": "2023-12",
+      "backend": "seamless",
+      "checkpoint": "facebook/seamless-m4t-v2-large",
+      "options": {
+        "chunk_seconds": 10,
+        "max_new_tokens": 512
+      },
+      "provider": "meta"
+    },
+    {
+      "id": "owsm-v3.1",
+      "name": "OWSM 3.1 1B",
+      "release_date": "2024-01",
+      "backend": "owsm",
+      "checkpoint": "espnet/owsm_v3.1_ebf",
+      "options": {},
+      "provider": "cmu"
+    },
+    {
+      "id": "qwen2",
+      "name": "Qwen2 Audio 7B",
+      "release_date": "2024-08",
+      "backend": "qwen2",
+      "checkpoint": "Qwen/Qwen2-Audio-7B",
+      "options": {},
+      "provider": "qwen"
+    },
+    {
+      "id": "owsm-v4",
+      "name": "OWSM 4.0 1B",
+      "release_date": "2025-05",
+      "backend": "owsm",
+      "checkpoint": "espnet/owsm_v4_medium_1B",
+      "options": {},
+      "provider": "cmu"
+    },
+    {
+      "id": "qwen3",
+      "name": "Qwen3 ASR 1.7B",
+      "release_date": "2025-06",
+      "backend": "qwen3",
+      "checkpoint": "Qwen/Qwen3-ASR-1.7B",
+      "options": {
+        "max_new_tokens": 2048
+      },
+      "provider": "qwen"
+    },
+    {
+      "id": "canary",
+      "name": "Canary Qwen 2.5B",
+      "release_date": "2025-07",
+      "backend": "canary",
+      "checkpoint": "nvidia/canary-qwen-2.5b",
+      "options": {
+        "max_new_tokens": 128
+      },
+      "provider": "nvidia"
+    },
+    {
+      "id": "chirp3",
+      "name": "Google Chirp 3",
+      "release_date": "2025-10",
+      "backend": "google",
+      "checkpoint": "chirp_3",
+      "options": {
+        "region": "us",
+        "language": "en-US",
+        "first_result_only": true
+      },
+      "provider": "google"
+    },
+    {
+      "id": "omni",
+      "name": "Omnilingual 7B",
+      "release_date": "2025-11",
+      "backend": "omni",
+      "checkpoint": "omniASR_LLM_7B",
+      "options": {
+        "language": "eng_Latn",
+        "chunk_seconds": 40
+      },
+      "provider": "meta"
+    }
+  ],
+  "analysis": {
+    "bootstrap": 1000,
+    "trend_filter": "wer_cer_le_1",
+    "datasets": {
+      "L2-Arctic": {
+        "standard": "USA",
+        "highlight": "Vietnamese",
+        "control_dataset": "L1-Arctic",
+        "example": {
+          "accent": "Vietnamese",
+          "older_model": "Whisper Large v2",
+          "newer_model": "MMS 1B All"
+        }
+      },
+      "L2-Arctic Spontaneous": {
+        "standard": "USA",
+        "highlight": "Korean",
+        "example": {
+          "accent": "Korean",
+          "older_model": "Canary Qwen 2.5B",
+          "newer_model": "Omnilingual 7B"
+        }
+      },
+      "SAA": {
+        "standard": "English",
+        "highlight": "Korean",
+        "accents": [
+          "Dutch",
+          "Spanish",
+          "Italian",
+          "English",
+          "French",
+          "Korean",
+          "Turkish",
+          "Arabic",
+          "Portuguese",
+          "German",
+          "Mandarin",
+          "Russian"
+        ],
+        "example": {
+          "accent": "Korean",
+          "older_model": "Whisper Large v2",
+          "newer_model": "MMS 1B All"
+        }
+      },
+      "Openslr83": {
+        "standard": "Southern English",
+        "highlight": "Irish English",
+        "example": {
+          "accent": "Irish English",
+          "older_model": "Google Chirp 3",
+          "newer_model": "Omnilingual 7B"
+        }
+      },
+      "ALLSTAR-LPP": {
+        "standard": "English",
+        "highlight": "Vietnamese",
+        "example": {
+          "accent": "Nkore",
+          "older_model": "Whisper Large v2",
+          "newer_model": "Canary Qwen 2.5B"
+        }
+      },
+      "ALLSTAR-DHR": {
+        "standard": "English",
+        "highlight": "Cantonese",
+        "example": {
+          "accent": "Cantonese",
+          "older_model": "Whisper Large v3",
+          "newer_model": "OWSM 3.1 1B"
+        }
+      },
+      "ALLSTAR-HT1": {
+        "standard": "English",
+        "highlight": "Nkore",
+        "example": {
+          "accent": "Nkore",
+          "older_model": "Whisper Large v1",
+          "newer_model": "Canary Qwen 2.5B"
+        }
+      },
+      "ALLSTAR-HT2": {
+        "standard": "English",
+        "highlight": "Nkore",
+        "example": {
+          "accent": "Nkore",
+          "older_model": "Whisper Large v1",
+          "newer_model": "Omnilingual 7B"
+        }
+      }
+    }
+  }
+}
