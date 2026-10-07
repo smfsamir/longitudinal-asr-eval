@@ -1,0 +1,35 @@
+dataset,metric,value,tolerance
+L2-Arctic,minority_md,0.113,0.001
+L2-Arctic,standard_md,0.039,0.001
+L2-Arctic,minority_rank,4,0
+L2-Arctic,standard_rank,2,0
+L2-Arctic,spearman_rho,-0.60,0.005
+L2-Arctic Spontaneous,minority_md,0.098,0.001
+L2-Arctic Spontaneous,standard_md,0.075,0.001
+L2-Arctic Spontaneous,minority_rank,3,0
+L2-Arctic Spontaneous,standard_rank,1,0
+SAA,minority_md,0.117,0.001
+SAA,standard_md,0.116,0.001
+SAA,minority_rank,7,0
+SAA,standard_rank,2,0
+Openslr83,minority_md,0.165,0.001
+Openslr83,standard_md,0.083,0.001
+Openslr83,minority_rank,6,0
+Openslr83,standard_rank,5,0
+Openslr83,spearman_rho,-0.75,0.005
+ALLSTAR-LPP,minority_md,0.036,0.001
+ALLSTAR-LPP,standard_md,0.025,0.001
+ALLSTAR-LPP,minority_rank,8,0
+ALLSTAR-LPP,standard_rank,2,0
+ALLSTAR-DHR,minority_md,0.038,0.001
+ALLSTAR-DHR,standard_md,0.013,0.001
+ALLSTAR-DHR,minority_rank,17,0
+ALLSTAR-DHR,standard_rank,1,0
+ALLSTAR-HT1,minority_md,0.122,0.001
+ALLSTAR-HT1,standard_md,0.023,0.001
+ALLSTAR-HT1,minority_rank,23,0
+ALLSTAR-HT1,standard_rank,3,0
+ALLSTAR-HT2,minority_md,0.144,0.001
+ALLSTAR-HT2,standard_md,0.026,0.001
+ALLSTAR-HT2,minority_rank,23,0
+ALLSTAR-HT2,standard_rank,2,0

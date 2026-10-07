@@ -183,3 +183,18 @@ spice/*
 *.png
 *.tsv
 *.txt
+
+# Local corpora and results
+.DS_Store
+/data/cache/
+/data/corpora/
+/data/manifests/
+/outputs/
+/models/
+!/requirements.txt
+!/data/suitcase/L1Suitcase.wav
+!/data/suitcase/L1Suitcase.txt
+
+# Paper figures embedded in the README
+!/docs/figures/*.png
+!/longitudinal_asr/logos/*.png

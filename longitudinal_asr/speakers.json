@@ -1,0 +1,192 @@
+{
+  "L1ARCTIC": {
+    "aew": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "ahw": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "German"
+    },
+    "aup": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Indian"
+    },
+    "awb": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Scottish"
+    },
+    "axb": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "Indian"
+    },
+    "bdl": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "clb": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "eey": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "fem": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Irish"
+    },
+    "gka": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Indian"
+    },
+    "jmk": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Canadian"
+    },
+    "ksp": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Indian"
+    },
+    "ljm": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "lnh": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "rms": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "USA"
+    },
+    "rxr": {
+      "sex": "male",
+      "lang": "US English",
+      "accent": "Dutch"
+    },
+    "slp": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "Indian"
+    },
+    "slt": {
+      "sex": "female",
+      "lang": "US English",
+      "accent": "USA"
+    }
+  },
+  "L2ARCTIC": {
+    "ABA": {
+      "gender": "M",
+      "native-language": "Arabic"
+    },
+    "SKA": {
+      "gender": "F",
+      "native-language": "Arabic"
+    },
+    "YBAA": {
+      "gender": "M",
+      "native-language": "Arabic"
+    },
+    "ZHAA": {
+      "gender": "F",
+      "native-language": "Arabic"
+    },
+    "BWC": {
+      "gender": "M",
+      "native-language": "Chinese"
+    },
+    "LXC": {
+      "gender": "F",
+      "native-language": "Chinese"
+    },
+    "NCC": {
+      "gender": "F",
+      "native-language": "Chinese"
+    },
+    "TXHC": {
+      "gender": "M",
+      "native-language": "Chinese"
+    },
+    "ASI": {
+      "gender": "M",
+      "native-language": "Hindi"
+    },
+    "RRBI": {
+      "gender": "M",
+      "native-language": "Hindi"
+    },
+    "SVBI": {
+      "gender": "F",
+      "native-language": "Hindi"
+    },
+    "TNI": {
+      "gender": "F",
+      "native-language": "Hindi"
+    },
+    "HJK": {
+      "gender": "F",
+      "native-language": "Korean"
+    },
+    "HKK": {
+      "gender": "M",
+      "native-language": "Korean"
+    },
+    "YDCK": {
+      "gender": "F",
+      "native-language": "Korean"
+    },
+    "YKWK": {
+      "gender": "M",
+      "native-language": "Korean"
+    },
+    "EBVS": {
+      "gender": "M",
+      "native-language": "Spanish"
+    },
+    "ERMS": {
+      "gender": "M",
+      "native-language": "Spanish"
+    },
+    "MBMPS": {
+      "gender": "F",
+      "native-language": "Spanish"
+    },
+    "NJS": {
+      "gender": "F",
+      "native-language": "Spanish"
+    },
+    "HQTV": {
+      "gender": "M",
+      "native-language": "Vietnamese"
+    },
+    "PNV": {
+      "gender": "F",
+      "native-language": "Vietnamese"
+    },
+    "THV": {
+      "gender": "F",
+      "native-language": "Vietnamese"
+    },
+    "TLV": {
+      "gender": "M",
+      "native-language": "Vietnamese"
+    }
+  }
+}
