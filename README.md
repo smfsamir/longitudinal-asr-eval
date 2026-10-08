@@ -15,7 +15,7 @@ Includes dataset preparation, 16 model configurations, WER/CER scoring, longitud
   <img src="docs/figures/ALLSTAR_LPP.png" width="49%" alt="ALLSTAR LPP: WER and accent gap over time">
 </p>
 
-Word error rates and standard–minority accent gaps across eight datasets.
+Word error rates and standard–minority accent gaps across eight datasets. To replicate the results in the paper, please run the `reproduce_paper.ipynb` file. It draws on the ASR transcripts under `data`. If you want to re-generate the transcripts as well, see below. 
 
 ## Setup
 
