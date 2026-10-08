@@ -180,7 +180,6 @@ allsstar/*
 spice/*
 
 # artifacts
-*.png
 *.tsv
 *.txt
 
@@ -197,4 +196,3 @@ spice/*
 
 # Paper figures embedded in the README
 !/docs/figures/*.png
-!/longitudinal_asr/logos/*.png
