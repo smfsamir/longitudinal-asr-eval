@@ -1,4 +1,4 @@
-"""Paper analyses: trends, positive-pair degradations, and bootstrap intervals."""
+"""Paper analyses: trends, positive-pair degradations, and one-sided bootstrap tests."""
 
 import json
 from pathlib import Path
@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import spearmanr
 
+from .datasets import ALLSTAR_ACCENTS
 from .manifest import digest, sha256_file
 
 KEY = ["dataset", "model", "sample_id"]
@@ -14,6 +15,22 @@ KEY = ["dataset", "model", "sample_id"]
 
 def read_scores(paths):
     frames = [pd.read_csv(p, keep_default_na=False, dtype={"sample_id": str}) for p in paths]
+    for frame in frames:
+        if "dataset" not in frame:
+            continue  # Report missing columns below.
+        legacy = frame.dataset.eq("ALLSTAR")
+        if legacy.any():
+            if (
+                "task" not in frame
+                or not frame.loc[legacy, "task"].isin(["LPP", "DHR", "HT1", "HT2"]).all()
+            ):
+                raise ValueError("Stored ALLSTAR scores need a valid task (LPP, DHR, HT1, HT2)")
+            frame.loc[legacy, "dataset"] = "ALLSTAR-" + frame.loc[legacy, "task"]
+        if "native_language" in frame:
+            allstar = frame.dataset.str.startswith("ALLSTAR-")
+            frame.loc[allstar, "native_language"] = frame.loc[allstar, "native_language"].replace(
+                ALLSTAR_ACCENTS
+            )
     df = pd.concat(frames, ignore_index=True)
     required = {*KEY, "release_date", "native_language", "groundtruth", "prediction", "wer", "cer"}
     if missing := required - set(df.columns):
@@ -59,7 +76,9 @@ def pairwise(means):
 def bootstrap_md(df, order, standard, minority, n=1000, seed=0):
     """Resample utterance WERs independently within each accent/model cell.
 
-    Return a percentile interval for minority-minus-standard mean degradation.
+    Significance follows the paper: the fraction of minority-minus-standard MD
+    differences <= 0 must be < 0.05. The two-sided 95% percentile interval is
+    also returned for description; its lower bound does not determine the test.
     """
     if n < 1:
         raise ValueError("Bootstrap count must be positive")
@@ -79,11 +98,12 @@ def bootstrap_md(df, order, standard, minority, n=1000, seed=0):
             md[accent] = mean_degradation(values)
         differences[b] = md[minority] - md[standard]
     lo, hi = np.quantile(differences, [0.025, 0.975])
+    fraction_nonpositive = float(np.mean(differences <= 0))
     return {
         "md_difference_ci_low": float(lo),
         "md_difference_ci_high": float(hi),
-        "bootstrap_fraction_nonpositive": float(np.mean(differences <= 0)),
-        "significant": bool(lo > 0),
+        "bootstrap_fraction_nonpositive": fraction_nonpositive,
+        "significant": bool(fraction_nonpositive < 0.05),
         "bootstrap_samples": n,
     }
 
@@ -101,10 +121,6 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     settings = config["analysis"]
-    expected = [
-        m["name"] for m in sorted(config["models"], key=lambda x: (x["release_date"], x["id"]))
-    ]
-    dates = {m["name"]: m["release_date"] for m in config["models"]}
     requested = list(datasets or settings["datasets"])
     unknown = set(requested) - set(settings["datasets"])
     if unknown:
@@ -122,6 +138,14 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
     )
     for dataset in requested:
         cfg = settings["datasets"][dataset]
+        # Stored results can name a different model at a release slot. Preserve
+        # that name instead of silently treating different checkpoints as aliases.
+        models = [
+            {**m, "name": cfg.get("model_names", {}).get(m["id"], m["name"])}
+            for m in sorted(config["models"], key=lambda x: (x["release_date"], x["id"]))
+        ]
+        expected = [m["name"] for m in models]
+        dates = {m["name"]: m["release_date"] for m in models}
         raw = df[df.dataset == dataset].copy()
         if raw.empty:
             if not allow_partial:
@@ -161,7 +185,11 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
         trend = raw.copy()
         if settings.get("trend_filter", "wer_cer_le_1") == "wer_cer_le_1":
             # The L1-Arctic fallback is appended after the notebook's filter.
-            keep = (trend.wer <= 1) & (trend.cer <= 1)
+            keep = trend.wer <= 1
+            # The stored ALLSTAR CERs are not comparable to the other exports;
+            # its paper plots cap WER only, as in the notebook.
+            if not dataset.startswith("ALLSTAR-"):
+                keep &= trend.cer <= 1
             if "control_dataset" in cfg:
                 keep |= trend.dataset.eq(cfg["control_dataset"])
             trend = trend[keep]
@@ -204,6 +232,7 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
             "minority": minority,
             "highest_mean_wer_accent": highest,
             "models": len(order),
+            "accents": len(means.columns),
             "trend_models": len(gap),
             "mean_gap": gap.mean(),
             "spearman_rho": rho,
@@ -248,7 +277,7 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
             summary,
             output / f"{dataset}.png",
             trend_sem,
-            providers={m["name"]: m.get("provider") for m in config["models"]},
+            providers={m["name"]: m.get("provider") for m in models},
         )
     if not all_summary:
         raise ValueError("No datasets analyzed")
@@ -266,6 +295,7 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
                 "config": config,
                 "seed": seed,
                 "bootstrap": n,
+                "significance_rule": "bootstrap_fraction_nonpositive < 0.05",
                 "datasets": requested,
                 "scores_hash": digest(df.to_csv(index=False)),
                 "implementation_sha256": sha256_file(__file__),
@@ -279,8 +309,11 @@ def analyze(df, config, output, datasets=None, allow_partial=False, bootstrap=No
     for row in all_summary:
         count = next(r["accents"] for r in all_md if r["dataset"] == row["dataset"])
         for role in ["minority", "standard"]:
+            md_display = f"{100 * row[role + '_md']:.1f}"
+            if role == "minority" and row["significant"]:
+                md_display += "*"
             lines.append(
-                f"{row['dataset']} & {row[role]} & {100 * row[role + '_md']:.1f} & {row[role + '_rank']}/{count}"
+                f"{row['dataset']} & {row[role]} & {md_display} & {row[role + '_rank']}/{count}"
                 + r" \\"
             )
     lines.append(r"\end{tabular}")
