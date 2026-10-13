@@ -226,6 +226,9 @@
           "accent": "Nkore",
           "older_model": "Whisper Large v2",
           "newer_model": "Canary Qwen 2.5B"
+        },
+        "model_names": {
+          "qwen3": "Qwen3 Audio 14B"
         }
       },
       "ALLSTAR-DHR": {
@@ -235,6 +238,9 @@
           "accent": "Cantonese",
           "older_model": "Whisper Large v3",
           "newer_model": "OWSM 3.1 1B"
+        },
+        "model_names": {
+          "qwen3": "Qwen3 Audio 14B"
         }
       },
       "ALLSTAR-HT1": {
@@ -244,6 +250,9 @@
           "accent": "Nkore",
           "older_model": "Whisper Large v1",
           "newer_model": "Canary Qwen 2.5B"
+        },
+        "model_names": {
+          "qwen3": "Qwen3 Audio 14B"
         }
       },
       "ALLSTAR-HT2": {
@@ -253,6 +262,9 @@
           "accent": "Nkore",
           "older_model": "Whisper Large v1",
           "newer_model": "Omnilingual 7B"
+        },
+        "model_names": {
+          "qwen3": "Qwen3 Audio 14B"
         }
       }
     }
