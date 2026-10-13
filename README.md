@@ -15,7 +15,7 @@ Includes dataset preparation, 16 model configurations, WER/CER scoring, longitud
   <img src="docs/figures/ALLSTAR_LPP.png" width="49%" alt="ALLSTAR LPP: WER and accent gap over time">
 </p>
 
-Word error rates and standard–minority accent gaps across eight datasets. Both the Python script interface and [`reproduce_paper.ipynb`](reproduce_paper.ipynb) reproduce the paper's analysis from the checked-in ASR transcripts and scores under `data`, without regenerating transcripts or downloading models. The notebook is an alternative interface for rendering the plots and Table II; dataset preparation and model inference are available through the script interface. To regenerate transcripts, see [Experiments](#experiments) below.
+Word error rates and standard–minority accent gaps across eight datasets.
 
 ## Setup
 
@@ -42,7 +42,7 @@ asr-eval audit outputs/analysis/summary.csv --output outputs/analysis/check.csv
 
 This writes the eight figure panels, MD values and ranks, one-sided bootstrap significance decisions, and supporting tables. The audit compares them with the corrected arXiv paper values in `data/paper_values.csv`. Alternatively, open `reproduce_paper.ipynb` in this environment and run all cells to write the notebook's panels and `outputs/table2.csv`. Both paths share the MD and bootstrap functions and use 1,000 replicates with seed 0 per dataset. See [analysis details](docs/analysis.md) for filtering and the stored ALLSTAR model labels.
 
-## Experiments
+## Reproduce the paper while regenerating transcripts
 
 [Prepare the datasets](docs/data.md), then install the relevant [model dependencies](docs/models.md).
 
