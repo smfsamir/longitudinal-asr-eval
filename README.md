@@ -1,5 +1,7 @@
 # Connecting the Dots
 
+[![arXiv](https://img.shields.io/badge/arXiv-2610.17761-b31b1b.svg)](https://arxiv.org/abs/2610.17761)
+
 Code for *Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties*.
 
 Includes dataset preparation, 16 model configurations, WER/CER scoring, longitudinal plots, and degradation analysis.
@@ -75,7 +77,7 @@ outputs/          Local predictions, run metadata, figures, and tables
   title = {Connecting the Dots: Enduring Performance Gaps in ASR Systems Between Standard and Minority English Varieties},
   author = {Metzger, Alexander and Srivastava, Aruna and Mukhamedvaleev, Ruslan and Yeo, Eunjung and Ahmed, Syed Ishtiaque and Markl, Nina and Kumar, Sachin and Samir, Farhan},
   year = {2026},
-  url = {https://github.com/smfsamir/longitudinal-asr-eval}
+  url = {https://arxiv.org/abs/2610.17761}
 }
 ```
 
